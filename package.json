@@ -1,7 +1,7 @@
 {
   "name": "ollama-pet",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.0.1",
   "type": "module",
   "description": "A customizable, interactive desktop AI pet widget powered by local Ollama LLMs and Tauri 2.",
   "author": "amvk2",

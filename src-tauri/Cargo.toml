@@ -1,6 +1,6 @@
 [package]
 name = "ollama-pet"
-version = "0.1.0"
+version = "0.0.1"
 description = "A customizable desktop AI pet widget powered by local Ollama LLMs."
 authors = ["amvk2"]
 edition = "2021"
