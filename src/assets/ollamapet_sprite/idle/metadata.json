@@ -1,0 +1,6 @@
+{
+  "is_animation": false,
+  "sprites": {
+    "idle.png": "character in idle standing position"
+  }
+}

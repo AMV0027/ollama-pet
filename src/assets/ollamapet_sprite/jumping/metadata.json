@@ -1,0 +1,11 @@
+{
+  "is_animation": true,
+  "animation_name": "jumping",
+  "cycle_duration_ms": 600,
+  "images": [
+    "1.png",
+    "2.png",
+    "3.png",
+    "4.png"
+  ]
+}

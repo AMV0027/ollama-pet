@@ -1,0 +1,54 @@
+{
+  "name": "ollama-pet",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "A customizable, interactive desktop AI pet widget powered by local Ollama LLMs and Tauri 2.",
+  "author": "amvk2",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amvk2/ollama-pet.git"
+  },
+  "bugs": {
+    "url": "https://github.com/amvk2/ollama-pet/issues"
+  },
+  "homepage": "https://github.com/amvk2/ollama-pet#readme",
+  "keywords": [
+    "tauri",
+    "react",
+    "ollama",
+    "desktop-pet",
+    "desktop-mascot",
+    "ai",
+    "llm",
+    "desktop-widget",
+    "assistant"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "tauri": "tauri"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.3.2",
+    "@tauri-apps/api": "^2",
+    "@tauri-apps/plugin-opener": "^2",
+    "autoprefixer": "^10.5.3",
+    "lucide-react": "^1.24.0",
+    "postcss": "^8.5.19",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "tailwindcss": "^4.3.2",
+    "zustand": "^5.0.14"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-react": "^4.6.0",
+    "typescript": "~5.8.3",
+    "vite": "^7.0.4"
+  }
+}

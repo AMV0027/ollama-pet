@@ -1,0 +1,10 @@
+{
+  "is_animation": false,
+  "sprites": {
+    "1.png": "thinking stage 1",
+    "2.png": "thinking stage 2",
+    "3.png": "thinking stage 3",
+    "4.png": "thinking stage 4",
+    "5.png": "thinking stage 5"
+  }
+}

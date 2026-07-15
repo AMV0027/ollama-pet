@@ -1,0 +1,12 @@
+{
+  "is_animation": false,
+  "sprites": {
+    "exclamation_mark.png": "exclamation mark symbol",
+    "heart.png": "heart symbol",
+    "light_bulb.png": "light bulb symbol",
+    "question_mark.png": "question mark symbol",
+    "sleeping_symbols.png": "Zzz sleeping symbols",
+    "stars.png": "stars symbols",
+    "tear_drop.png": "tear drop symbol"
+  }
+}

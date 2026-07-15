@@ -1,0 +1,12 @@
+{
+  "is_animation": true,
+  "animation_name": "sleeping",
+  "cycle_duration_ms": 1000,
+  "images": [
+    "1.png",
+    "2.png",
+    "3.png",
+    "4.png",
+    "5.png"
+  ]
+}

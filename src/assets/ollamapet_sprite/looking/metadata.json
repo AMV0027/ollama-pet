@@ -1,0 +1,9 @@
+{
+  "is_animation": false,
+  "sprites": {
+    "down.png": "looking down",
+    "left.png": "looking left",
+    "right.png": "looking right",
+    "up.png": "looking up"
+  }
+}
