@@ -15,6 +15,7 @@ export type PetState =
 export interface Message {
   role: 'user' | 'assistant';
   content: string;
+  images?: string[]; // Base64 image data strings
 }
 
 interface PetStore {

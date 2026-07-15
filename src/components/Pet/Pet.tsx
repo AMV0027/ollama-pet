@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { usePetStore, PetState } from '../../stores/usePetStore';
 import { getCurrentWindow } from '@tauri-apps/api/window';
+import { PhysicalPosition } from '@tauri-apps/api/dpi';
 
 // ─── Sprite Registry ──────────────────────────────────────────────────────────
 const spriteModules = import.meta.glob<{ default: string }>(
@@ -44,7 +45,7 @@ const STATE_BUBBLES: Partial<Record<PetState, string[]>> = {
   Thinking: ['Hmm...', 'Let me think...', '🤔', 'Processing...'],
   Waving:   ['Hey there! 👋', 'Hello!', 'Hi! 😊'],
   Sleeping: ['Zzz...', '💤', '...zzz...'],
-  Walking:  ['Going for a stroll~', '🚶', 'Exploring!'],
+  Walking:  ['Going for a stroll~', 'walking...', 'walk...walk...'],
   Typing:   ['Tap tap tap...', '⌨️', 'Coding away~'],
   Looking:  ['Hmm?', '👀', 'What was that?'],
   Jumping:  ['Woohoo! 🎉', 'Yay!', '✨'],
@@ -53,6 +54,17 @@ const STATE_BUBBLES: Partial<Record<PetState, string[]>> = {
 export const Pet: React.FC<{ onClickOverride?: () => void }> = ({ onClickOverride }) => {
   const { petState, toggleChat, speechBubble, setSpeechBubble, walkingDirection } = usePetStore();
   const [frameIndex, setFrameIndex] = useState(0);
+  const frameIndexRef = useRef(0);
+  const walkingDirectionRef = useRef(walkingDirection);
+
+  useEffect(() => {
+    frameIndexRef.current = frameIndex;
+  }, [frameIndex]);
+
+  useEffect(() => {
+    walkingDirectionRef.current = walkingDirection;
+  }, [walkingDirection]);
+
   const bubbleTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const prevStateRef = useRef<PetState>(petState);
 
@@ -117,15 +129,44 @@ export const Pet: React.FC<{ onClickOverride?: () => void }> = ({ onClickOverrid
     setFrameIndex(0);
     if (frames.length <= 1 || frameInterval <= 0) return;
 
-    const interval = setInterval(() => {
-      setFrameIndex((prev) => {
-        if (!config.loop && prev >= frames.length - 1) return prev;
-        return (prev + 1) % frames.length;
-      });
+    const interval = setInterval(async () => {
+      const prev = frameIndexRef.current;
+      if (!config.loop && prev >= frames.length - 1) return;
+      const next = (prev + 1) % frames.length;
+
+      setFrameIndex(next);
+
+      if (petState === 'Walking' && next !== 0) {
+        try {
+          const windowObj = getCurrentWindow() as any;
+          if (windowObj.label === 'main') {
+            const curPos = await windowObj.outerPosition();
+            const monitor = await windowObj.currentMonitor();
+            if (monitor) {
+              const scaleFactor = monitor.scaleFactor || 1;
+              const step = Math.round(2 * scaleFactor);
+              const nextX = curPos.x + (walkingDirectionRef.current * step);
+
+              const leftLimit = Math.round(20 * scaleFactor);
+              const rightLimit = monitor.size.width - Math.round(140 * scaleFactor);
+
+              if (nextX > rightLimit) {
+                usePetStore.getState().setWalkingDirection(-1);
+              } else if (nextX < leftLimit) {
+                usePetStore.getState().setWalkingDirection(1);
+              } else {
+                await windowObj.setPosition(new PhysicalPosition(nextX, curPos.y));
+              }
+            }
+          }
+        } catch (err) {
+          console.error('Error during walk frame movement:', err);
+        }
+      }
     }, frameInterval);
 
     return () => clearInterval(interval);
-  }, [petState, frames.length, frameInterval, config.loop]);
+  }, [petState, frames.length, frameInterval, config.loop, walkingDirection]);
 
   // ─── Speech bubble ticker ───────────────────────────────────────────────
   useEffect(() => {
