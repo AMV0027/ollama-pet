@@ -34,7 +34,17 @@ function App() {
 
   const [input, setInput] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
+
+  // ─── Auto-resize input textarea ───────────────────────────────────────────
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.style.height = '24px';
+      const scrollHeight = inputRef.current.scrollHeight;
+      inputRef.current.style.height = `${Math.min(Math.max(scrollHeight, 24), 80)}px`;
+    }
+  }, [input]);
+
 
   // ─── Timers and Loop Refs ─────────────────────────────────────────────────
   const sequenceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -329,16 +339,22 @@ function App() {
 
         {/* Input bar at the bottom */}
         <form className="quick-ask-bar" onSubmit={handleAsk}>
-          <input
+                  <textarea
             ref={inputRef}
             className="quick-ask-input"
-            type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                const fakeEvent = { preventDefault: () => {} } as React.FormEvent;
+                handleAsk(fakeEvent);
+              }
+            }}
             placeholder="Ask me..."
             disabled={isGenerating}
-            autoComplete="off"
             spellCheck={false}
+            rows={1}
           />
           <button className="quick-ask-btn" type="submit" disabled={!input.trim() || isGenerating}>
             {isGenerating ? <Loader2 size={12} className="animate-spin" /> : <Send size={12} />}

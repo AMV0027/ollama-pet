@@ -1,3 +1,4 @@
+import { fetch } from '@tauri-apps/plugin-http';
 import { Message } from '../stores/usePetStore';
 
 interface OllamaGenerateRequest {
