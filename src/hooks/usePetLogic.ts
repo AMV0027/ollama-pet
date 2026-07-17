@@ -271,7 +271,7 @@ export function usePetLogic() {
       window.removeEventListener('mouseover', handleMouseOver);
       window.removeEventListener('mouseout', handleMouseOut);
       window.removeEventListener('scroll', handleScroll);
-      if (scrollTimeout) clearTimeout(scrollTimeout);
+      if (scrollDebounce) clearTimeout(scrollDebounce);
     };
   }, [isMobile]);
 
