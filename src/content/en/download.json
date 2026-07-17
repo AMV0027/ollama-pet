@@ -1,0 +1,47 @@
+{
+  "headline": "Ready to Adopt?",
+  "subheadline": "Download Ollama Pet for your platform and bring your AI companion to life.",
+  "platforms": [
+    {
+      "id": "mac",
+      "name": "macOS",
+      "icon": "Apple",
+      "description": "Requires macOS 11.0 or later",
+      "buttonText": "Download for Mac",
+      "arch": ["Apple Silicon", "Intel"]
+    },
+    {
+      "id": "windows",
+      "name": "Windows",
+      "icon": "Monitor",
+      "description": "Requires Windows 10 or later",
+      "buttonText": "Download for Windows",
+      "arch": ["x64", "ARM64"]
+    },
+    {
+      "id": "linux",
+      "name": "Linux",
+      "icon": "Terminal",
+      "description": "AppImage and DEB available",
+      "buttonText": "Download for Linux",
+      "arch": ["x64", "ARM64"]
+    }
+  ],
+  "requirements": [
+    "Ollama installed locally",
+    "At least 8GB RAM recommended for 7B models",
+    "~100MB disk space for the app"
+  ],
+  "spriteConfig": {
+    "name": "jumping",
+    "frames": 4,
+    "fps": 6,
+    "loop": true,
+    "pingPong": false,
+    "grid": [1, 4],
+    "frameWidth": 691,
+    "frameHeight": 1182,
+    "atlasWidth": 2764,
+    "atlasHeight": 1182
+  }
+}

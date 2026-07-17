@@ -1,0 +1,57 @@
+{
+  "headline": "Try It Live",
+  "subheadline": "Watch the pet think and respond in real-time. No API keys needed.",
+  "conversations": [
+    {
+      "user": "Hey Ollama, write a hello world in Rust",
+      "assistant": "fn main() {\n    println!(\"Hello, world!\");\n}",
+      "delay": 800
+    },
+    {
+      "user": "Explain quantum computing like I'm 5",
+      "assistant": "Imagine a coin spinning on a table — it's both heads AND tails at the same time until it stops! That's a qubit.",
+      "delay": 1200
+    },
+    {
+      "user": "Tell me a developer joke",
+      "assistant": "Why do programmers prefer dark mode? Because light attracts bugs! 🐛",
+      "delay": 600
+    }
+  ],
+  "thinkingSprite": {
+    "name": "thinking",
+    "frames": 5,
+    "fps": 5,
+    "loop": true,
+    "pingPong": false,
+    "grid": [1, 5],
+    "frameWidth": 456,
+    "frameHeight": 665,
+    "atlasWidth": 2280,
+    "atlasHeight": 665
+  },
+  "speakingSprite": {
+    "name": "speaking",
+    "frames": 8,
+    "fps": 8,
+    "loop": true,
+    "pingPong": false,
+    "grid": [1, 8],
+    "frameWidth": 526,
+    "frameHeight": 873,
+    "atlasWidth": 4208,
+    "atlasHeight": 873
+  },
+  "idleSprite": {
+    "name": "looking",
+    "frames": 4,
+    "fps": 5,
+    "loop": true,
+    "pingPong": true,
+    "grid": [1, 4],
+    "frameWidth": 423,
+    "frameHeight": 664,
+    "atlasWidth": 1692,
+    "atlasHeight": 664
+  }
+}

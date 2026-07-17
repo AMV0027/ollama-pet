@@ -1,0 +1,27 @@
+{
+  "headline": "Tech Stack",
+  "subheadline": "Modern tools for native performance",
+  "technologies": [
+    { "name": "Tauri 2", "category": "Framework", "icon": "Box" },
+    { "name": "Rust", "category": "Backend", "icon": "Terminal" },
+    { "name": "React 18", "category": "Frontend", "icon": "Code" },
+    { "name": "TypeScript", "category": "Language", "icon": "FileCode" },
+    { "name": "Tailwind CSS", "category": "Styling", "icon": "Palette" },
+    { "name": "Zustand", "category": "State", "icon": "Database" },
+    { "name": "Ollama API", "category": "AI", "icon": "Brain" },
+    { "name": "SQLite", "category": "Storage", "icon": "HardDrive" }
+  ],
+  "sprite": "using_laptop",
+  "spriteConfig": {
+    "name": "using_laptop",
+    "frames": 10,
+    "fps": 10,
+    "loop": true,
+    "pingPong": false,
+    "grid": [1, 10],
+    "frameWidth": 529,
+    "frameHeight": 705,
+    "atlasWidth": 5290,
+    "atlasHeight": 705
+  }
+}

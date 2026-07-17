@@ -1,0 +1,19 @@
+{
+  "headline": "Meet Your New Coding Companion",
+  "subheadline": "Ollama Pet is an open-source, local AI assistant that lives on your desktop, powered by your favorite local LLMs.",
+  "ctaPrimary": "Download Now",
+  "ctaSecondary": "View on GitHub",
+  "scrollHint": "Scroll to explore",
+  "spriteConfig": {
+    "name": "waving",
+    "frames": 4,
+    "fps": 3,
+    "loop": true,
+    "pingPong": true,
+    "grid": [1, 4],
+    "frameWidth": 564,
+    "frameHeight": 705,
+    "atlasWidth": 2256,
+    "atlasHeight": 705
+  }
+}

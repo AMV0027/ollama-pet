@@ -1,0 +1,34 @@
+{
+  "headline": "How It Works",
+  "subheadline": "A frictionless local LLM pipeline that respects your privacy.",
+  "steps": [
+    {
+      "number": 1,
+      "title": "Type Your Message",
+      "description": "Click the pet to open the chat panel. Type naturally — it understands context."
+    },
+    {
+      "number": 2,
+      "title": "Local Processing",
+      "description": "Your message goes to Ollama running locally. No network calls, no cloud."
+    },
+    {
+      "number": 3,
+      "title": "Stream Response",
+      "description": "Tokens stream back in real-time. The pet 'speaks' each word as it arrives."
+    }
+  ],
+  "sprite": "using_laptop",
+  "spriteConfig": {
+    "name": "using_laptop",
+    "frames": 10,
+    "fps": 4,
+    "loop": true,
+    "pingPong": false,
+    "grid": [1, 10],
+    "frameWidth": 529,
+    "frameHeight": 705,
+    "atlasWidth": 5290,
+    "atlasHeight": 705
+  }
+}

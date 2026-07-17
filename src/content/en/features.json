@@ -1,0 +1,49 @@
+{
+  "headline": "Built for Developers.",
+  "subheadline": "A native, lightweight desktop companion that integrates with your workflow seamlessly.",
+  "features": [
+    {
+      "icon": "Brain",
+      "title": "Local-First AI",
+      "description": "Runs entirely on your machine via Ollama. No API keys, no cloud, no compromises."
+    },
+    {
+      "icon": "Zap",
+      "title": "Instant Response",
+      "description": "Stream tokens in real-time. The pet speaks each word as it's generated, keeping latency at zero."
+    },
+    {
+      "icon": "Shield",
+      "title": "Zero Telemetry",
+      "description": "No analytics, no crash reports, no tracking. Your conversations stay yours, forever."
+    },
+    {
+      "icon": "Code",
+      "title": "Model Agnostic",
+      "description": "Llama 3, Phi-3, Gemma, Qwen, Mistral, CodeLlama — use any model Ollama supports out of the box."
+    },
+    {
+      "icon": "Monitor",
+      "title": "Desktop Native",
+      "description": "Built with Tauri 2. Tiny binary, native performance, system tray integration, and low memory footprint."
+    },
+    {
+      "icon": "Palette",
+      "title": "Personality Modes",
+      "description": "Curious, Focused, Playful, Sleepy — pick a personality that matches your current workflow and mood."
+    }
+  ],
+  "sprite": "walking",
+  "spriteConfig": {
+    "name": "walking",
+    "frames": 6,
+    "fps": 10,
+    "loop": true,
+    "pingPong": false,
+    "grid": [1, 6],
+    "frameWidth": 465,
+    "frameHeight": 619,
+    "atlasWidth": 2790,
+    "atlasHeight": 619
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "nav": {
+    "features": "Features",
+    "tech": "Tech Stack",
+    "howItWorks": "How It Works",
+    "demo": "Live Demo",
+    "customize": "Customize",
+    "privacy": "Privacy",
+    "download": "Download"
+  },
+  "hero": {
+    "ctaPrimary": "Download for Free",
+    "ctaSecondary": "View on GitHub"
+  },
+  "footer": {
+    "description": "Your desktop AI companion powered by local LLMs.",
+    "github": "GitHub",
+    "discord": "Discord",
+    "twitter": "Twitter",
+    "license": "MIT License",
+    "madeWith": "Built with Tauri, React, and ❤️"
+  },
+  "demo": {
+    "startChat": "Start Chatting",
+    "typing": "Ollama is thinking...",
+    "placeholder": "Type a message...",
+    "send": "Send"
+  }
+}

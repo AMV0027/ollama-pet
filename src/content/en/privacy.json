@@ -1,0 +1,45 @@
+{
+  "headline": "Zero Telemetry.",
+  "subheadline": "We believe your code and conversations belong to you. Ollama Pet makes no network calls to external servers.",
+  "features": [
+    {
+      "icon": "Shield",
+      "title": "100% Local Inference",
+      "description": "All LLM processing happens on your hardware via Ollama."
+    },
+    {
+      "icon": "Database",
+      "title": "Local Storage Only",
+      "description": "Chat history is saved strictly on your local disk."
+    },
+    {
+      "icon": "Globe",
+      "title": "Works Offline",
+      "description": "Turn off your Wi-Fi. The pet keeps thinking."
+    }
+  ],
+  "thinkingSprite": {
+    "name": "thinking",
+    "frames": 5,
+    "fps": 5,
+    "loop": true,
+    "pingPong": false,
+    "grid": [1, 5],
+    "frameWidth": 456,
+    "frameHeight": 665,
+    "atlasWidth": 2280,
+    "atlasHeight": 665
+  },
+  "lookingSprite": {
+    "name": "looking",
+    "frames": 4,
+    "fps": 5,
+    "loop": true,
+    "pingPong": true,
+    "grid": [1, 4],
+    "frameWidth": 423,
+    "frameHeight": 664,
+    "atlasWidth": 1692,
+    "atlasHeight": 664
+  }
+}

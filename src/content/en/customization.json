@@ -1,0 +1,33 @@
+{
+  "headline": "Make It Yours",
+  "subheadline": "Tailor the companion to fit your workflow.",
+  "features": [
+    {
+      "icon": "Palette",
+      "title": "Custom Themes",
+      "description": "Match your desktop aesthetics."
+    },
+    {
+      "icon": "MessageSquare",
+      "title": "Personalities",
+      "description": "Switch between different AI personas."
+    },
+    {
+      "icon": "Settings",
+      "title": "Configurable",
+      "description": "Adjust size, transparency, and behavior."
+    }
+  ],
+  "spriteConfig": {
+    "name": "sleeping",
+    "frames": 5,
+    "fps": 3,
+    "loop": true,
+    "pingPong": false,
+    "grid": [1, 5],
+    "frameWidth": 452,
+    "frameHeight": 605,
+    "atlasWidth": 2260,
+    "atlasHeight": 605
+  }
+}

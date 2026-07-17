@@ -1,0 +1,117 @@
+{
+  "animations": {
+    "waving": {
+      "name": "waving",
+      "frames": 4,
+      "fps": 6,
+      "loop": true,
+      "pingPong": true,
+      "grid": [1, 4],
+      "frameWidth": 564,
+      "frameHeight": 705,
+      "atlasWidth": 2256,
+      "atlasHeight": 705
+    },
+    "walking": {
+      "name": "walking",
+      "frames": 6,
+      "fps": 8,
+      "loop": true,
+      "pingPong": false,
+      "grid": [1, 6],
+      "frameWidth": 465,
+      "frameHeight": 619,
+      "atlasWidth": 2790,
+      "atlasHeight": 619
+    },
+    "using_laptop": {
+      "name": "using_laptop",
+      "frames": 10,
+      "fps": 10,
+      "loop": true,
+      "pingPong": false,
+      "grid": [1, 10],
+      "frameWidth": 529,
+      "frameHeight": 705,
+      "atlasWidth": 5290,
+      "atlasHeight": 705
+    },
+    "thinking": {
+      "name": "thinking",
+      "frames": 5,
+      "fps": 6,
+      "loop": true,
+      "pingPong": false,
+      "grid": [1, 5],
+      "frameWidth": 456,
+      "frameHeight": 665,
+      "atlasWidth": 2280,
+      "atlasHeight": 665
+    },
+    "speaking": {
+      "name": "speaking",
+      "frames": 8,
+      "fps": 8,
+      "loop": true,
+      "pingPong": false,
+      "grid": [1, 8],
+      "frameWidth": 526,
+      "frameHeight": 873,
+      "atlasWidth": 4208,
+      "atlasHeight": 873
+    },
+    "jumping": {
+      "name": "jumping",
+      "frames": 4,
+      "fps": 10,
+      "loop": true,
+      "pingPong": false,
+      "grid": [1, 4],
+      "frameWidth": 691,
+      "frameHeight": 1182,
+      "atlasWidth": 2764,
+      "atlasHeight": 1182
+    },
+    "sleeping": {
+      "name": "sleeping",
+      "frames": 5,
+      "fps": 4,
+      "loop": true,
+      "pingPong": false,
+      "grid": [1, 5],
+      "frameWidth": 452,
+      "frameHeight": 605,
+      "atlasWidth": 2260,
+      "atlasHeight": 605
+    },
+    "looking": {
+      "name": "looking",
+      "frames": 4,
+      "fps": 6,
+      "loop": true,
+      "pingPong": true,
+      "grid": [1, 4],
+      "frameWidth": 423,
+      "frameHeight": 664,
+      "atlasWidth": 1692,
+      "atlasHeight": 664
+    }
+  },
+  "assets": {
+    "name": "assets",
+    "frames": 7,
+    "fps": 10,
+    "loop": true,
+    "pingPong": false,
+    "grid": [7, 1],
+    "frameWidth": 42,
+    "frameHeight": 42,
+    "atlasWidth": 294,
+    "atlasHeight": 42,
+    "url": "/sprites/assets.webp"
+  },
+  "defaults": {
+    "size": 120,
+    "scale": 1
+  }
+}

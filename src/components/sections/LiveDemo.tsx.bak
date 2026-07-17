@@ -1,0 +1,290 @@
+'use client';
+
+import { useState, useEffect, useRef } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { SpriteAnimator } from '@/components/ui/SpriteAnimator';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
+import { ICONS, getIcon } from '@/lib/icons';
+import { cn } from '@/lib/utils';
+import demoData from '@/content/en/demo.json';
+import commonData from '@/content/en/common.json';
+
+const THINKING_CONFIG = {
+  name: 'thinking',
+  frames: 5,
+  fps: 8,
+  loop: true,
+  pingPong: false,
+  grid: [1, 5] as [number, number],
+  frameWidth: 456,
+  frameHeight: 665,
+  atlasWidth: 2280,
+  atlasHeight: 665
+};
+
+const SPEAKING_CONFIG = {
+  name: 'speaking',
+  frames: 8,
+  fps: 12,
+  loop: true,
+  pingPong: false,
+  grid: [1, 8] as [number, number],
+  frameWidth: 526,
+  frameHeight: 873,
+  atlasWidth: 4208,
+  atlasHeight: 873
+};
+
+export function LiveDemo() {
+  const [activeConv, setActiveConv] = useState(0);
+  const [messages, setMessages] = useState<Array<{ role: 'user' | 'assistant'; content: string; streaming?: boolean }>>([]);
+  const [spriteState, setSpriteState] = useState<'idle' | 'thinking' | 'speaking'>('idle');
+  const [inputValue, setInputValue] = useState('');
+  const [isStreaming, setIsStreaming] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    // Only scroll on user interaction, not on initial load
+  }, [messages]);
+
+  const startDemo = async (convIndex: number) => {
+    if (isStreaming) return;
+    setActiveConv(convIndex);
+    setIsStreaming(true);
+    setMessages([]);
+    setSpriteState('idle');
+
+    const conversation = demoData.conversations[convIndex];
+    
+    setMessages([{ role: 'user', content: conversation.user }]);
+    
+    setSpriteState('thinking');
+    await new Promise(r => setTimeout(r, 600));
+    
+    setSpriteState('speaking');
+    const response = conversation.assistant;
+    const words = response.split(' ');
+    let streamedContent = '';
+    
+    setMessages(prev => [...prev, { role: 'assistant', content: '', streaming: true }]);
+    
+    for (let i = 0; i < words.length; i++) {
+      await new Promise(r => setTimeout(r, 40 + Math.random() * 30));
+      streamedContent += (i === 0 ? '' : ' ') + words[i];
+      setMessages(prev => prev.map((m, idx) => 
+        idx === prev.length - 1 ? { ...m, content: streamedContent } : m
+      ));
+    }
+    
+    setMessages(prev => prev.map(m => m.streaming ? { ...m, streaming: false } : m));
+    setSpriteState('idle');
+    setIsStreaming(false);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!inputValue.trim() || isStreaming) return;
+    
+    const userMsg = inputValue;
+    setInputValue('');
+    setIsStreaming(true);
+    setMessages(prev => [...prev, { role: 'user', content: userMsg }]);
+    
+    setSpriteState('thinking');
+    setTimeout(() => {
+      setSpriteState('speaking');
+      const responses = [
+        "That's a great question! Let me think...",
+        "I'm running locally on your machine via Ollama.",
+        "No cloud needed - everything happens right here.",
+        "Want to try another model? Just ask!",
+        "I can help with code, questions, or just chat."
+      ];
+      const response = responses[Math.floor(Math.random() * responses.length)];
+      const words = response.split(' ');
+      let streamed = '';
+      
+      setMessages(prev => [...prev, { role: 'assistant', content: '', streaming: true }]);
+      
+      words.forEach((word, i) => {
+        setTimeout(() => {
+          streamed += (i === 0 ? '' : ' ') + word;
+          setMessages(prev => prev.map((m, idx) => 
+            idx === prev.length - 1 ? { ...m, content: streamed } : m
+          ));
+        }, i * 50);
+      });
+      
+      setTimeout(() => {
+        setMessages(prev => prev.map(m => m.streaming ? { ...m, streaming: false } : m));
+        setSpriteState('idle');
+        setIsStreaming(false);
+      }, words.length * 50 + 200);
+    }, 800);
+  };
+
+  return (
+    <section id="demo" className="relative py-24 lg:py-32 px-6 overflow-hidden" aria-labelledby="demo-heading">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary/75 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
+            </span>
+            Live Demo
+          </span>
+          <h2 id="demo-heading" className="text-4xl lg:text-5xl font-bold tracking-tight mb-4 gradient-primary">
+            {demoData.headline}
+          </h2>
+          <p className="text-lg text-muted max-w-2xl mx-auto">{demoData.subheadline}</p>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          {/* Left: Chat */}
+          <div className="relative">
+            <Card className="glass-strong min-h-[500px] max-h-[70vh] flex flex-col">
+                <div className="flex items-center justify-between">
+                  <CardTitle className="flex items-center gap-3">
+                    <Avatar className="h-10 w-10">
+                      <SpriteAnimator
+                        config={THINKING_CONFIG}
+                        src="/sprites/thinking.webp"
+                        className="w-full h-full"
+                        autoPlay
+                      />
+                    </Avatar>
+                    <div>
+                      <p className="font-semibold">Ollama Pet</p>
+                      <p className="text-xs text-zinc-500">
+                        {spriteState === 'thinking' ? 'Thinking...' : spriteState === 'speaking' ? 'Speaking...' : 'Ready'}
+                      </p>
+                    </div>
+                  </CardTitle>
+                  <span className={cn(
+                    'inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium transition-colors',
+                    spriteState === 'thinking' && 'bg-yellow-500/10 text-yellow-400 animate-pulse',
+                    spriteState === 'speaking' && 'bg-green-500/10 text-green-400 animate-bounce',
+                    spriteState === 'idle' && 'bg-zinc-500/10 text-zinc-400'
+                  )}>
+                    <span className="w-1.5 h-1.5 rounded-full bg-current" />
+                    {spriteState === 'thinking' && 'Thinking'}
+                    {spriteState === 'speaking' && 'Speaking'}
+                    {spriteState === 'idle' && 'Idle'}
+                  </span>
+                </div>
+              </CardHeader>
+
+              <ScrollArea className="flex-1 p-4 space-y-4">
+                {messages.map((msg, idx) => (
+                  <div key={idx} className={cn('flex gap-3', msg.role === 'user' && 'flex-row-reverse')}>
+                    <Avatar className="h-8 w-8 flex-shrink-0">
+                      <AvatarFallback>
+{msg.role === 'user' ? (
+                            <ICONS.User className="h-4 w-4" />
+                          ) : (
+                          <SpriteAnimator
+                            config={spriteState === 'speaking' ? SPEAKING_CONFIG : THINKING_CONFIG}
+                            src={spriteState === 'speaking' ? '/sprites/speaking.webp' : '/sprites/thinking.webp'}
+                            className="w-full h-full"
+                            autoPlay={spriteState !== 'idle'}
+                          />
+                        )}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className={cn(
+                      'max-w-[75%] rounded-2xl px-4 py-2',
+                      msg.role === 'user'
+                        ? 'bg-primary text-primary-foreground rounded-tr-none'
+                        : 'bg-zinc-800/50 text-zinc-100 rounded-tl-none'
+                    )}>
+                      {msg.streaming ? (
+                        <span className="relative inline-block">
+                          {msg.content}
+                          <span className="animate-pulse ml-1">▌</span>
+                        </span>
+                      ) : (
+                        msg.content
+                      )}
+                    </div>
+                  </div>
+                ))}
+                <div ref={messagesEndRef} />
+              </ScrollArea>
+
+              <form onSubmit={handleSubmit} className="flex gap-2 p-4 border-t border-zinc-800 flex-shrink-0">
+                <input
+                  type="text"
+                  value={inputValue}
+                  onChange={e => setInputValue(e.target.value)}
+                  placeholder={commonData.demo.placeholder}
+                  disabled={isStreaming}
+                  className="flex-1 bg-zinc-800/50 border border-zinc-700 rounded-xl px-4 py-3 text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent disabled:opacity-50"
+                />
+                <Button
+                  type="submit"
+                  disabled={!inputValue.trim() || isStreaming}
+                  className="px-6"
+                >
+                  {isStreaming ? (
+                    <span className="flex items-center gap-2">
+                      <ICONS.Loader2 className="h-4 w-4 animate-spin" />
+                      {commonData.demo.typing}
+                    </span>
+                  ) : (
+                    commonData.demo.send
+                  )}
+                </Button>
+              </form>
+            </Card>
+          </div>
+
+          {/* Right: Quick demos + sprite */}
+          <div className="relative">
+            <div className="space-y-4 mb-8">
+              {demoData.conversations.map((conv, idx) => (
+                <Button
+                  key={idx}
+                  variant={activeConv === idx ? 'default' : 'outline'}
+                  className="w-full justify-start text-left glass"
+                  onClick={() => startDemo(idx)}
+                  disabled={isStreaming}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className={cn(
+                      'w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0',
+                      activeConv === idx ? 'bg-primary' : 'bg-zinc-800/50'
+                    )}>
+                      <ICONS.MessageSquare className={cn('h-5 w-5', activeConv === idx ? 'text-primary-foreground' : 'text-zinc-400')} />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-medium truncate">{conv.user.substring(0, 50)}...</p>
+                      <p className="text-xs text-zinc-500 truncate">{conv.assistant.substring(0, 60)}...</p>
+                    </div>
+                  </div>
+                </Button>
+              ))}
+            </div>
+
+            {/* Sprite display */}
+            <div className="relative w-full max-w-md mx-auto">
+              <SpriteAnimator
+                config={spriteState === 'speaking' ? SPEAKING_CONFIG : THINKING_CONFIG}
+                src={spriteState === 'speaking' ? '/sprites/speaking.webp' : '/sprites/thinking.webp'}
+                className="w-full h-auto filter drop-shadow-[0_0_40px_rgba(48,112,176,0.5)]"
+                autoPlay={spriteState !== 'idle'}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
